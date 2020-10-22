@@ -15,20 +15,21 @@ import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MovieUseCaseTest{
-    private lateinit var movieUseCase : MovieUseCase
+class MovieUseCaseTest {
+    private lateinit var movieUseCase: MovieUseCase
 
-    @Mock private lateinit var movieRepository: IMovieRepository
+    @Mock
+    private lateinit var movieRepository: IMovieRepository
 
     @Before
-    fun setUp(){
+    fun setUp() {
         movieUseCase = MovieInteractor(movieRepository)
         val dataFlowable = mock(Flowable::class.java) as Flowable<Resource<List<Movie>>>
         `when`(movieRepository.getAllMovie()).thenReturn(dataFlowable)
     }
 
     @Test
-    fun getAllMovie(){
+    fun getAllMovie() {
         movieUseCase.getAllMovie()
 
         verify(movieRepository).getAllMovie()
